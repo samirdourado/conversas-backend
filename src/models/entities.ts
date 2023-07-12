@@ -1,7 +1,6 @@
 import { getRounds, hashSync } from "bcryptjs"
-import { Entity, PrimaryGeneratedColumn, Column, BeforeInsert, BeforeUpdate, ManyToOne, JoinColumn } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, BeforeInsert, BeforeUpdate, ManyToOne, JoinColumn, Timestamp } from 'typeorm';
 
-// Tabela users
 @Entity('users')
 class User {
     @PrimaryGeneratedColumn('uuid')
@@ -16,11 +15,11 @@ class User {
     @Column({ length: 120, })
     password: string;
 
-    @Column({ nullable: true, })
+    @Column({ nullable: true })
     profileImage: string;
 
-    @Column({ type: 'boolean', default: false, })
-    accept: boolean;
+    // @Column({ type: 'boolean', default: false, })
+    // accept: boolean;
 
     @BeforeInsert()
     @BeforeUpdate()
@@ -29,7 +28,7 @@ class User {
         if (!isEncrypted) {
             this.password = hashSync(this.password, 10)
         }
-    }
+    }   
 }
 
 @Entity('one_one')
@@ -41,15 +40,23 @@ class OneOne {
     title: string;
 
     @Column({ type: 'date'})
-    date: string | Date;
+    date: Date;
 
     @Column({ type: 'time'})
-    hour: string;
+    hour: Timestamp;
 
+    @Column({ type: 'boolean', default: false })
+    done: boolean;
+
+    @ManyToOne(() => User, {cascade: true})
+    @JoinColumn()
+    organizerUUID: User;
+    
     @ManyToOne(() => User)
     @JoinColumn()
-    schedule: User;
+    guestUUID: User;
 }
+
 
 @Entity('talking_points')
 class TalkingPoints {
@@ -57,16 +64,29 @@ class TalkingPoints {
     uuid: string;
 
     @Column({ length: 127 })
-    title: string;
+    point: string;
 
-    @ManyToOne(() => OneOne)
+    @ManyToOne(() => OneOne, {cascade: true})
     @JoinColumn()
-    talkingPoints: OneOne;
-    
+    oneOneUUID: OneOne;
+}
+
+@Entity('notes')
+class Notes {
+    @PrimaryGeneratedColumn('uuid')
+    uuid: string;
+
+    @Column({ length: 127 })
+    note: string;
+
+    @ManyToOne(() => OneOne, {cascade: true})
+    @JoinColumn()
+    oneOneUUID: OneOne;    
 }
 
 export {
     User,
     OneOne,
     TalkingPoints,
+    Notes,
 }
