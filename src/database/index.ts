@@ -1,2 +1,8 @@
-// importar as funções da entities
-// e exportar novamente
+import { User, OneOne, TalkingPoints, Notes  } from "../models/entities";
+
+export {
+    User,
+    OneOne,
+    TalkingPoints,
+    Notes,
+}
