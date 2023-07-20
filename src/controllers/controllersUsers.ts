@@ -43,9 +43,9 @@ export const listEspecificUserController = async (req: Request, res: Response) =
 
         const uuidUser = req.params.uuid;
 
-        const users = await listEspecificUserService(uuidUser)
+        const users = await listEspecificUserService(uuidUser);
         
-        return res.status(200).json(users)
+        return res.status(200).json(users);
 
     } catch (error) {
 
