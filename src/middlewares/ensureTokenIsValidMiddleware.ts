@@ -23,7 +23,7 @@ export const ensureTokenIsValidMiddleware = (req: Request, res: Response, next: 
             }
     
             req.user = {
-                uuid: string(decoded.sub),            
+                uuid: string(decoded.sub),
             }
     
             return next()

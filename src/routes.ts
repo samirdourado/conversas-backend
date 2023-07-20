@@ -9,6 +9,8 @@ import { createLoginSchema } from './schemas/login.schema';
 import { ensureTokenIsValidMiddleware } from './middlewares/ensureTokenIsValidMiddleware';
 import { ensureUserExistsMiddleware } from './middlewares/ensureUserExistMiddleware';
 import { ensureIsLoggedIn } from './middlewares/ensureIsLoggedIn';
+import { oneOneEditSchema, oneOneSchema } from './schemas/oneOneSchema';
+import { createOneOneController, listAllOneOneUserController, editOneOneController } from './controllers/controllerOneOne';
 
 // Rotas de user
 export const userRoutes: Router = Router();
@@ -22,11 +24,14 @@ userRoutes.delete('/:uuid', ensureTokenIsValidMiddleware, ensureUserExistsMiddle
 // Rotas de Login
 export const loginRoutes: Router = Router();
 
-loginRoutes.post('', ensureBodyDataIsValidMuddleware(createLoginSchema), loginUserController )
-
-
+loginRoutes.post('', ensureBodyDataIsValidMuddleware(createLoginSchema), loginUserController)
 
 // Rotas de One One
+export const oneOneRoutes: Router = Router();
+
+oneOneRoutes.post('', ensureTokenIsValidMiddleware, ensureUserExistsMiddleware, ensureBodyDataIsValidMuddleware(oneOneSchema), createOneOneController);
+oneOneRoutes.get('/:uuid', ensureTokenIsValidMiddleware, ensureUserExistsMiddleware, ensureIsLoggedIn, listAllOneOneUserController)
+oneOneRoutes.patch('/:uuid', ensureTokenIsValidMiddleware, ensureUserExistsMiddleware, ensureIsLoggedIn, ensureBodyDataIsValidMuddleware(oneOneEditSchema), editOneOneController)
 
 // Rotas de Talking Points
 
