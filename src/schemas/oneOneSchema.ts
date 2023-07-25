@@ -21,8 +21,8 @@ export const oneOneReturnSchema = z.object({
     done: z.boolean().default(false),    
     organizerUUID: z.lazy(() => userReturnSchema),
     guestUUID: z.lazy(() => userReturnSchema),
-    // talkingPoints: z.lazy(() => talkingPointArray),
-    // notes: z.lazy(() => notesArray),
+    talking_points: z.lazy(() => talkingPointArray),
+    notes: z.lazy(() => notesArray),
 });
 
 export const oneOneEditedSchema = oneOneReturnSchema.partial()
