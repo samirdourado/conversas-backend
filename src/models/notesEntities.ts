@@ -14,7 +14,7 @@ class Notes {
 
     @ManyToOne(() => OneOne, {cascade: true})
     @JoinColumn()
-    oneOneUUID: OneOne;    
+    oneOneUUID: OneOne;
 }
 
 export default Notes

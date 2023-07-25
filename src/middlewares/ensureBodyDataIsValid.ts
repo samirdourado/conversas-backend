@@ -2,7 +2,7 @@ import { NextFunction, Request, Response } from "express";
 import { ZodTypeAny } from "zod";
 import { IUser } from "../interfaces/user.interface";
 
-export const ensureBodyDataIsValidMuddleware = (schema: ZodTypeAny) => (req: Request, res: Response, next: NextFunction) => {
+export const ensureBodyDataIsValidMiddleware = (schema: ZodTypeAny) => (req: Request, res: Response, next: NextFunction) => {
 
     try {
         

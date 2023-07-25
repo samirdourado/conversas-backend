@@ -1,5 +1,7 @@
 import { z } from 'zod'
 import { userReturnSchema } from './user.schema'
+import { talkingPointArray, talkingPointReturnSchema } from './talkingPointsSchema';
+import { noteReturnSchema, notesArray } from './notesSchema';
 
 export const oneOneSchema = z.object({
     title: z.string().max(127),
@@ -18,8 +20,12 @@ export const oneOneReturnSchema = z.object({
     hour: z.string(),
     done: z.boolean().default(false),    
     organizerUUID: z.lazy(() => userReturnSchema),
-    guestUUID: z.lazy(() => userReturnSchema)
+    guestUUID: z.lazy(() => userReturnSchema),
+    // talkingPoints: z.lazy(() => talkingPointArray),
+    // notes: z.lazy(() => notesArray),
 });
+
+export const oneOneEditedSchema = oneOneReturnSchema.partial()
 
 export const allOneOneUserSchema = oneOneReturnSchema.array();
 
