@@ -45,8 +45,8 @@ export const listAllOneOneUserService = async (uuidUser: string) => {
         .createQueryBuilder('oneone')
         .leftJoinAndSelect('oneone.organizerUUID', 'organizerUUID')
         .leftJoinAndSelect('oneone.guestUUID', 'guestUUID')
-        // .leftJoinAndSelect('oneone.talking_points', 'talking_points')
-        // .leftJoinAndSelect('oneone.notes', 'notes')
+        .leftJoinAndSelect('oneone.talking_points', 'talking_points')
+        .leftJoinAndSelect('oneone.notes', 'notes')
         .where('oneone.organizerUUID.uuid = :uuidUser OR oneone.guestUUID.uuid = :uuidUser', {
             uuidUser: uuidUser,            
     })
