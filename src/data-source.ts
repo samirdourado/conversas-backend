@@ -6,20 +6,7 @@ import path from "path"
 const dataSourceConfig = (): DataSourceOptions => {
 
     const migrationsPath: string = path.join(__dirname, './migrations/**.{ts,js}')
-    const entitiesPath: string = path.join(__dirname, './models/**.{ts,js}')
-    // const migrationsPath: string = path.join(__dirname, '../migrations/**.{ts,js}')
-    // const entitiesPath: string = path.join(__dirname, '../models/**.{ts,js')
-
-    // const nodeEnv: string | undefined = process.env.NODE_ENV
-    
-    // if (nodeEnv === 'test') {
-    //     return {
-    //         type: 'sqlite',
-    //         database: ':memory:',
-    //         synchronize: true,
-    //         entities: [entitiesPath]
-    //     }
-    // }
+    const entitiesPath: string = path.join(__dirname, './models/**.{ts,js}')    
 
     const dbUrl: string | undefined = process.env.DATABASE_URL
 

@@ -26,7 +26,6 @@ const ensureEmailExistsMiddleware = async (req: Request, res: Response, next: Ne
         next()        
     } catch (error) {
         console.log(error)        
-        // return res.status(409).json({message: error})
         return res.status(409).json({message: "Email already exists"})
     }
 
