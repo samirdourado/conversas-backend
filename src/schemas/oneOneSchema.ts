@@ -13,6 +13,16 @@ export const oneOneSchema = z.object({
 
 export const oneOneArray = oneOneSchema.array()
 
+export const oneOneCreateReturnSchema = z.object({
+    uuid: z.string(),
+    title: z.string().max(127),
+    date: z.string(),
+    hour: z.string(),
+    done: z.boolean().default(false),    
+    organizerUUID: z.lazy(() => userReturnSchema),
+    guestUUID: z.lazy(() => userReturnSchema),    
+});
+
 export const oneOneReturnSchema = z.object({
     uuid: z.string(),
     title: z.string().max(127),

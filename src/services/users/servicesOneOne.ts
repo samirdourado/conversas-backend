@@ -3,7 +3,7 @@ import { AppDataSource } from "../../data-source";
 import { OneOne, TalkingPoints, User } from "../../database";
 import { AppError } from "../../errors";
 import { IOneOne, IOneOneEdit, IOneOneEditReturn, IOneOneReturn, IOneOneUpdatePartial } from "../../interfaces/oneOneInterface";
-import { allOneOneUserSchema, oneOneEditReturnSchema, oneOneEditedSchema, oneOneReturnSchema } from "../../schemas/oneOneSchema";
+import { allOneOneUserSchema, oneOneCreateReturnSchema, oneOneEditReturnSchema, oneOneEditedSchema, oneOneReturnSchema } from "../../schemas/oneOneSchema";
 import { IUpdateReturn } from "../../interfaces/user.interface";
 
 export const createOneOneService = async (oneOneData: IOneOne, organizerUUID: string) => {
@@ -29,11 +29,12 @@ export const createOneOneService = async (oneOneData: IOneOne, organizerUUID: st
         ...oneOneData,
         organizerUUID: organizerUser,
         guestUUID: guestUser,
+                
     })
     
     await oneOneRepository.save(oneOne)
 
-    return oneOneReturnSchema.parse(oneOne)
+    return oneOneCreateReturnSchema.parse(oneOne)
 }
 
 export const listAllOneOneUserService = async (uuidUser: string) => {
@@ -50,7 +51,9 @@ export const listAllOneOneUserService = async (uuidUser: string) => {
         .where('oneone.organizerUUID.uuid = :uuidUser OR oneone.guestUUID.uuid = :uuidUser', {
             uuidUser: uuidUser,            
     })
-    .getMany();    
+    .getMany();   
+    
+    console.log(oneOneInfos)
 
     return allOneOneUserSchema.parse(oneOneInfos)
 }

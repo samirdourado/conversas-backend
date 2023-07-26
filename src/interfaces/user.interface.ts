@@ -7,6 +7,10 @@ export type IUserPartial = DeepPartial<IUser>
 export type IUserReturn = z.infer<typeof userReturnSchema>
 export type IUsersReturn = z.infer<typeof allUsersReturnSchema>
 
-export type IUpdate = z.infer<typeof userEditSchema>
-export type IUpdatePartial = DeepPartial<IUser>
+// export type IUpdate = z.infer<typeof userEditSchema>
+// export type IUpdatePartial = DeepPartial<IUser>
+// export type IUpdateReturn = z.infer<typeof userEditReturnSchema>
+
+export type IUserUpdate = z.infer<typeof userEditSchema>
+export type IUpdatePartial = DeepPartial<IUserUpdate>
 export type IUpdateReturn = z.infer<typeof userEditReturnSchema>

@@ -1,10 +1,33 @@
 import { Repository } from "typeorm"
-import { IUser, IUserReturn, IUpdate, IUsersReturn, IUpdatePartial } from "../../interfaces/user.interface"
+import { IUser, IUserReturn, IUserUpdate, IUsersReturn, IUpdatePartial } from "../../interfaces/user.interface"
 import { AppDataSource } from "../../data-source"
 import { User } from "../../database"
 import { AppError } from "../../errors"
 import { allUsersReturnSchema, userEditReturnSchema, userReturnSchema } from "../../schemas/user.schema"
+import { v2 as cloudinary } from 'cloudinary';
 
+
+
+
+// export const createUserService = async (userData: IUser) => {    
+
+//     try {
+//         const userRepository: Repository<User> = AppDataSource.getRepository(User)
+//         const user = userRepository.create(userData)
+    
+//         if (!user) {
+//           throw new AppError('Not create!', 400)
+//         }
+    
+//         await userRepository.save(user)
+    
+//         const newUser = userReturnSchema.parse(user)
+    
+//         return newUser;
+//       } catch (error) {
+//         throw new AppError('Not create!', 400)
+//       }
+// }
 
 export const createUserService = async (userData: IUser) => {    
 
@@ -65,6 +88,7 @@ export const updateUserService = async (userData: IUpdatePartial, uuidUser: stri
         uuid: uuidUser
     })    
 
+    // console.log({...userInfos, ...userData})    
     userInfos = userRepository.create({...userInfos, ...userData})    
 
     await userRepository.save(userInfos)

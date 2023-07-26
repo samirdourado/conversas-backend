@@ -1,13 +1,18 @@
+// require('dotenv').config();
+// import 'dotenv'
 import 'express-async-errors'
 import express, { Application} from 'express'
 import { handleErros } from './errors'
 import { loginRoutes, notesRoutes, oneOneRoutes, talkingPointsRoutes, userRoutes } from './routes'
+
 
 const app: Application = express()
 const cors = require('cors')
 
 app.use(express.json());
 app.use(cors());
+
+
 
 // Rotas de users
 app.use('/users', userRoutes);
