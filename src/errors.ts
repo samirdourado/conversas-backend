@@ -21,7 +21,7 @@ const handleErros = (err: any, req: Request, res: Response, _: NextFunction) => 
         return res.status(400).json({message: err.flatten().fieldErrors})
     }
 
-    console.log(err) //ver possiveis erros que passarem fora das verificações
+    console.log(err)
 
     return res.status(500).json({
         message: "Internal server error"

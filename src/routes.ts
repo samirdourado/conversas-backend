@@ -17,6 +17,7 @@ import { ensureTalkingPointExistsMiddleware } from './middlewares/ensureTalkingP
 import { createNoteController, deleteNoteController, editNoteController, listAllNotesController } from './controllers/controllerNotes';
 import { editNoteSchema, newNoteSchema } from './schemas/notesSchema';
 import { ensureNoteExistsMiddleware } from './middlewares/ensureNoteExistMiddleware';
+import upload from './middlewares/multerMiddleware';
 
 
 // Rotas de user
@@ -24,9 +25,9 @@ export const userRoutes: Router = Router();
 userRoutes.post('', ensureBodyDataIsValidMiddleware(userSchema), ensureEmailExistsMiddleware, createUserController );
 userRoutes.get('', ensureTokenIsValidMiddleware, listUsersController);
 userRoutes.get('/:uuid', ensureTokenIsValidMiddleware, ensureUserExistsMiddleware, ensureIsLoggedIn, listEspecificUserController );
-userRoutes.patch('/:uuid', ensureTokenIsValidMiddleware, ensureUserExistsMiddleware, ensureIsLoggedIn, ensureBodyDataIsValidMiddleware(userUpdateSchema), ensureEmailExistsMiddleware, updateUserController);
+// userRoutes.patch('/:uuid', ensureTokenIsValidMiddleware, ensureUserExistsMiddleware, ensureIsLoggedIn, ensureBodyDataIsValidMiddleware(userUpdateSchema), ensureEmailExistsMiddleware, updateUserController);
+userRoutes.patch('/:uuid', upload.single("profileImage"), ensureTokenIsValidMiddleware, ensureUserExistsMiddleware, updateUserController);
 userRoutes.delete('/:uuid', ensureTokenIsValidMiddleware, ensureUserExistsMiddleware, ensureIsLoggedIn, deleteUserController);
-
 
 // Rotas de Login
 export const loginRoutes: Router = Router();

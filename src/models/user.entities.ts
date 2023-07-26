@@ -1,10 +1,10 @@
 import { getRounds, hashSync } from "bcryptjs"
 import { Entity, PrimaryGeneratedColumn, Column, BeforeInsert, BeforeUpdate, ManyToOne, JoinColumn, Timestamp, OneToMany } from 'typeorm';
-
 import OneOne from "./oneOneEntities";
+import { Multer } from "multer";
 
 @Entity('users')
-class User {
+class User {    
     @PrimaryGeneratedColumn('uuid')
     uuid: string;
 
