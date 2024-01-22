@@ -58,31 +58,22 @@ export const listAllOneOneUserService = async (uuidUser: string) => {
     return allOneOneUserSchema.parse(oneOneInfos)
 }
 
-// export const listSpecificOneOneUserService = async (uuidOneOne: string) => {    
+export const listSpecificOneOneUserService = async (uuidOneOne: string) => {    
     
-//     const oneOneRepository: Repository<OneOne> = AppDataSource.getRepository(OneOne);
+    const oneOneRepository: Repository<OneOne> = AppDataSource.getRepository(OneOne);
 
-//     const oneOneInfos: OneOne | null = await oneOneRepository.findOne({
-//         where: {uuid: uuidOneOne },
-//         relations: {
-//             organizerUUID: true,
-//             guestUUID: true,
-//         }
-//     });
+    const oneOneInfos: OneOne | null = await oneOneRepository.findOne({
+        where: {uuid: uuidOneOne },
+        relations: {
+            organizerUUID: true,
+            guestUUID: true,
+            talking_points: true,
+            notes: true,
+        }
+    });
 
-//     console.log(oneOneInfos)
-
-//     // const oneOneInfos: OneOne[] = await oneOneRepository
-//     //     .createQueryBuilder('oneone')
-//     //     .leftJoinAndSelect('oneone.organizerUUID', 'organizerUUID')
-//     //     .leftJoinAndSelect('oneone.guestUUID', 'guestUUID')
-//     //     .where('oneone.organizerUUID.uuid = :uuidUser OR oneone.guestUUID.uuid = :uuidUser', {
-//     //         uuidUser: uuidUser,            
-//     // })
-//     // .getMany();    
-
-//     // return allOneOneUserSchema.parse(oneOneInfos)
-// }
+    return oneOneInfos   
+}
 
 export const editOneOneService = async (oneOneData: IOneOneEdit, uuidOneOne: string) => {    
     

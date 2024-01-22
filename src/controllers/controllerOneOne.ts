@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { IOneOne } from "../interfaces/oneOneInterface";
-import { createOneOneService, listAllOneOneUserService, editOneOneService, deleteOneOneService } from "../services/users/servicesOneOne";
+import { createOneOneService, listAllOneOneUserService, editOneOneService, deleteOneOneService, listSpecificOneOneUserService } from "../services/users/servicesOneOne";
 
 export const createOneOneController = async (req: Request, res: Response) => {
 
@@ -35,22 +35,23 @@ export const listAllOneOneUserController = async (req: Request, res: Response) =
     }
 }
 
-// export const listSpecifcOneOneUserController = async (req: Request, res: Response) => {
+export const listSpecifcOneOneUserController = async (req: Request, res: Response) => {    
 
-//     try {
+    try {
 
-//         const uuidOneOne = req.params.uuid;        
+        const uuidOneOne = req.params.uuid;    
+        // console.log(uuidOneOne)
 
-//         const oneOneFromUser = await listSpecificOneOneUserService(uuidOneOne)
+        const oneOneFromUser = await listSpecificOneOneUserService(uuidOneOne)
 
-//         return res.status(200).send(oneOneFromUser)
+        return res.status(200).send(oneOneFromUser)
         
-//     } catch (error) {
-//         console.log(error)
+    } catch (error) {
+        console.log(error)
 
-//         return res.status(500).json({message: "Não foi possível listar as one one."})                
-//     }
-// }
+        return res.status(500).json({message: "Não foi possível listar as one one."})                
+    }
+}
 
 export const editOneOneController = async (req: Request, res: Response) => {
 

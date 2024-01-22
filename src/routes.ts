@@ -9,7 +9,7 @@ import { ensureTokenIsValidMiddleware } from './middlewares/ensureTokenIsValidMi
 import { ensureUserExistsMiddleware } from './middlewares/ensureUserExistMiddleware';
 import { ensureIsLoggedIn } from './middlewares/ensureIsLoggedIn';
 import { oneOneEditSchema, oneOneSchema } from './schemas/oneOneSchema';
-import { createOneOneController, listAllOneOneUserController, editOneOneController, deleteOneOneController } from './controllers/controllerOneOne';
+import { createOneOneController, listAllOneOneUserController, editOneOneController, deleteOneOneController, listSpecifcOneOneUserController } from './controllers/controllerOneOne';
 import { newTalkingPointSchema, talkingPointEditedSchema } from './schemas/talkingPointsSchema';
 import { createTalkingPointController, deleteTalkingPointController, editTalkingPointController, listAllTalkingPointController } from './controllers/controllerTalkingPoints';
 import { ensureOneOneExistsMiddleware } from './middlewares/ensureOneOneExistMiddleware';
@@ -38,9 +38,12 @@ loginRoutes.post('', ensureBodyDataIsValidMiddleware(createLoginSchema), loginUs
 export const oneOneRoutes: Router = Router();
 oneOneRoutes.post('', ensureTokenIsValidMiddleware, ensureUserExistsMiddleware, ensureBodyDataIsValidMiddleware(oneOneSchema), createOneOneController);
 oneOneRoutes.get('/:uuid', ensureTokenIsValidMiddleware, ensureUserExistsMiddleware, ensureIsLoggedIn, listAllOneOneUserController)
-// oneOneRoutes.get('/:uuid', ensureTokenIsValidMiddleware, ensureOneOneExistsMiddleware, listSpecifcOneOneUserController)
 oneOneRoutes.patch('/:uuid', ensureTokenIsValidMiddleware, ensureOneOneExistsMiddleware, ensureBodyDataIsValidMiddleware(oneOneEditSchema), editOneOneController)
 oneOneRoutes.delete('/:uuid', ensureTokenIsValidMiddleware, ensureOneOneExistsMiddleware, deleteOneOneController)
+
+export const oneOneEspecific: Router = Router();
+oneOneEspecific.get('/:uuid', ensureTokenIsValidMiddleware, ensureOneOneExistsMiddleware, listSpecifcOneOneUserController)
+
 
 
 // Rotas de Talking Points

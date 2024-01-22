@@ -3,7 +3,7 @@
 import 'express-async-errors'
 import express, { Application} from 'express'
 import { handleErros } from './errors'
-import { loginRoutes, notesRoutes, oneOneRoutes, talkingPointsRoutes, userRoutes } from './routes'
+import { loginRoutes, notesRoutes, oneOneEspecific, oneOneRoutes, talkingPointsRoutes, userRoutes } from './routes'
 
 
 const app: Application = express()
@@ -22,6 +22,7 @@ app.use('/login', loginRoutes)
 
 // Rotas de One One
 app.use('/oneone', oneOneRoutes)
+app.use('/oneoneespecific', oneOneEspecific)
 
 // Rotas de Talking Points
 app.use('/talkingpoints', talkingPointsRoutes)
