@@ -5,6 +5,7 @@
   "license": "MIT",
   "scripts": {
     "dev": "ts-node-dev --cls --rs --ignore-watch node_modules src/server.ts",
+    "start": "ts-node-start --cls --rs --ignore-watch node_modules src/server.ts",
     "build": "tsc",
     "typeorm": "typeorm-ts-node-commonjs"
   },
